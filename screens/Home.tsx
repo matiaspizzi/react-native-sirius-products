@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import ProductsList from '../components/ProductsList';
+import { StyleSheet, View } from 'react-native';
+import ProductList from '../components/ProductsList';
 
 const HomeScreen = () => {
   return(
     <View style={styles.View}>
-      <ProductsList/>
+      <ProductList/>
     </View>
   )
 }

@@ -1,12 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import MyTabs from './navigation/tabs'
+import { CartProvider } from './context/CartContext'
 
 const App = () => {
   return (
-    <NavigationContainer>
-
-      <MyTabs />
-    </NavigationContainer>
+    <CartProvider>
+      <NavigationContainer>
+        <MyTabs /> 
+      </NavigationContainer>
+    </CartProvider>
   );
 };
 
