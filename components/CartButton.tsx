@@ -1,8 +1,9 @@
-import { Button, View, Text, StyleSheet, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { useState, useContext } from 'react'
 import { Product } from '../utils/types'
 import { CartContext } from '../context/CartContext'
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import { useToast } from "react-native-toast-notifications";
 
 interface PropTypes {
   product: Product
@@ -11,14 +12,22 @@ interface PropTypes {
 const CartButton = ({product}: PropTypes) => {
   const [quantity, setQty] = useState<number>(1)
 
-  const { cart, addToCart } = useContext(CartContext)
+  const { addToCart } = useContext(CartContext)
+
+  const toast = useToast();
 
   const handleButton = () => {
     addToCart(product, quantity)
+    toast.show("Product added to cart", {
+      type: "success",
+      placement: "bottom",
+      duration: 2000,
+    });
   }
 
   const handleSum = () =>{
-    setQty(quantity + 1)
+    if (quantity < 9)
+      setQty(quantity + 1)
   }
 
   const handleRest = () => {
@@ -53,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
     backgroundColor: 'white',
-    height: 30,
+    height: 40,
     width: 100,
     shadowOffset: {
       width: 0,
@@ -73,7 +82,7 @@ const styles = StyleSheet.create({
     gap: 20
   },
   button: {
-    padding: 3,
+    padding: 8,
     borderRadius: 5
   }
 

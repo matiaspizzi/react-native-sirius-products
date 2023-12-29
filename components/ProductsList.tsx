@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, ScrollView, ActivityIndicator, Text } from 'react-native'
 import { useEffect, useState } from 'react'
 import service from '../utils/service'
 import { Product } from '../utils/types'
@@ -7,18 +7,25 @@ import ProductListCard from './ProductListCard'
 const ProductsList = () =>{
   const [products, setProducts] = useState<Product[] | undefined>();
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | null>(null)
 
   useEffect(() =>{
     service.getProducts({}).then((res) =>{
       setProducts(res ? res : undefined)
       setLoading(false)
+    }).catch((e: Error) => {
+      setError(e)
     })
   }, [])
 
-  return loading ? 
-  (
-    <View style={{ alignItems: "center", flex: 1, justifyContent: "center" }}>
+  return loading && !error ? (
+    <View style={{ alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
       <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+  ) : error ? (
+    <View style={{ alignSelf: 'center', flex: 1, justifyContent: 'center', alignItems: 'center', alignContent: 'center', height: 400 }}>
+      <Text style={{color:'red', fontSize: 10, fontWeight: 'bold'}}>{error.message}</Text>
+      <Text style={{fontSize: 14,}}>Sorry, we had a problem loading the products, try again later.</Text>
     </View>
   ) : (
     <ScrollView>

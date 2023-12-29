@@ -1,5 +1,9 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
-import { Product } from '../utils/types'
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native'
+import { Product, RootStackParamList } from '../utils/types'
+import { CartContext } from '../context/CartContext'
+import { useContext } from 'react'
+import { useToast } from 'react-native-toast-notifications'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 
 interface PropTypes{
   product: Product,
@@ -8,21 +12,45 @@ interface PropTypes{
 
 const ProductListCard = ({product, quantity}: PropTypes) => {
 
+  const { removeFromCart } = useContext(CartContext)
+
+  const toast = useToast()
+  
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const handlePress = () => {
+    navigation.navigate('Product', { id: `${product.id}` })
+  }
+
+  const handleRemove = () => {
+    removeFromCart(product)
+    toast.show("Product removed", {
+      type: "success",
+      placement: "bottom",
+      duration: 2000,
+    });
+  }
+
   return(
-      <View style={styles.card}>
+      <Pressable style={styles.card} onPress={handlePress}>
         <Image
           style={styles.image}
           source={{
             uri: product.image
           }}
         />
-        <View style={styles.container}>
+        <View>
             <Text style={styles.title}>{product.title}</Text>
-            <Text style={{color: 'grey', fontSize: 12}}>${product.price}</Text>
+            <Text style={{color: 'grey', fontSize: 12}}>1x ${product.price}</Text>
             <Text style={{fontWeight: 'bold'}}>${(product.price * quantity).toFixed(2)}</Text>
         </View>
-        <Text style={{color: 'grey', fontWeight: 'bold'}}>x{quantity}</Text>
-      </View>
+        <View style={styles.container}>
+            <Text style={{color: 'grey', fontWeight: 'bold'}}>x{quantity}</Text>
+            <Pressable style={styles.button} onPress={handleRemove}>
+                <Text style={{fontSize: 10}}>Eliminar</Text>
+            </Pressable>
+        </View>
+      </Pressable>
   )
 }
 
@@ -32,7 +60,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     flexDirection: 'row',
-    height: 100,
+    minHeight: 100,
     width: 400,
     margin: 2,
     alignItems: 'center',
@@ -58,6 +86,26 @@ const styles = StyleSheet.create({
     width: 250
   },
   container: {
-    
+    flex: 1,
+    flexDirection: 'column',
+    gap: 10,
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: 'white',
+    borderColor: 'red',
+    borderWidth: 0.25,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity:  0.17,
+    shadowRadius: 3.05,
+    elevation: 4,
+    shadowColor: 'red',
   }
 })

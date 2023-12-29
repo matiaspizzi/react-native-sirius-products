@@ -1,13 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
 import MyTabs from './navigation/tabs'
 import { CartProvider } from './context/CartContext'
+import { ToastProvider } from 'react-native-toast-notifications'
 
 const App = () => {
   return (
     <CartProvider>
-      <NavigationContainer>
-        <MyTabs /> 
-      </NavigationContainer>
+      <ToastProvider offset={60}>
+        <NavigationContainer>
+          <MyTabs /> 
+        </NavigationContainer>
+      </ToastProvider>
     </CartProvider>
   );
 };

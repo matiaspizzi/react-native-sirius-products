@@ -10,7 +10,7 @@ const MyTabs = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{ tabBarActiveTintColor: "grey" }}
+      screenOptions={{ tabBarActiveTintColor: "#b6b4b4" }}
     >
       <Tab.Screen
         name="Home"

@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
   view: {
     margin: 30,
     padding: 10,
+    height: 500,
     gap: 20,
     flex: 1,
     flexDirection: "column",
-    flexWrap: "wrap",
     justifyContent: "space-around",
     alignItems: "center",
     alignSelf: "center",
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: "grey",
+    maxWidth: 300,
   },
   price: {
     fontWeight: "bold",
