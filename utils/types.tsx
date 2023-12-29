@@ -4,7 +4,7 @@ export interface ProductsQuery {
 }
 
 export interface Product {
-  id: number;
+  id: string;
   title: string;
   price: number;
   description: string;
@@ -23,5 +23,6 @@ export interface CartItem {
 
 export type RootStackParamList = {
   Product: { id: string };
+  Products: undefined
   Home: undefined;
 };
