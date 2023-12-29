@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/Home"
 import CartScreen from "../screens/Cart"
-import { Entypo } from "@expo/vector-icons";
+import { FontAwesome5 } from '@expo/vector-icons';
 import MyStacks from '../navigation/stacks'
 import useCartLength from '../hooks/useCartLength'
 
@@ -11,7 +10,6 @@ const MyTabs = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
       screenOptions={{ tabBarActiveTintColor: "grey" }}
     >
       <Tab.Screen
@@ -20,7 +18,7 @@ const MyTabs = () => {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => {
-            return <Entypo name="home" size={size} color={color} />;
+            return <FontAwesome5 name="home" size={size} color={color} />;
           },
           headerTitleAlign: "center",
         }}
@@ -31,7 +29,7 @@ const MyTabs = () => {
         options={{
           tabBarLabel: "Cart",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => {
-            return <Entypo name="shopping-cart" size={size} color={color} />;
+            return <FontAwesome5 name="shopping-cart" size={size} color={color} />;
           },
           headerTitleAlign: "center",
           tabBarBadge: useCartLength(),
