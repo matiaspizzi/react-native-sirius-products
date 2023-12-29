@@ -2,7 +2,7 @@ import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
 import { useEffect, useState } from 'react'
 import service from '../utils/service'
 import { Product } from '../utils/types'
-import ProductCard from './ProductCard'
+import ProductListCard from './ProductListCard'
 
 const ProductsList = () =>{
   const [products, setProducts] = useState<Product[] | undefined>();
@@ -24,7 +24,7 @@ const ProductsList = () =>{
     <ScrollView>
       <View style={styles.view}>
         {products?.map((product) =>(
-          <ProductCard key={product.id} product={product} />
+          <ProductListCard key={product.id} product={product} />
         ))}
       </View>
     </ScrollView>
