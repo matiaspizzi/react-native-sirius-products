@@ -18,10 +18,7 @@ const ProductListCard = ({product, quantity}: PropTypes) => {
   
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const handlePress = () => {
-    navigation.navigate('Product', { id: `${product.id}` })
-  }
-
+  
   const handleRemove = () => {
     removeFromCart(product)
     toast.show("Product removed", {
@@ -29,6 +26,10 @@ const ProductListCard = ({product, quantity}: PropTypes) => {
       placement: "bottom",
       duration: 2000,
     });
+  }
+
+  const handlePress = () => {
+    navigation.navigate('Product', { id: `${product.id}` })
   }
 
   return(
@@ -39,8 +40,8 @@ const ProductListCard = ({product, quantity}: PropTypes) => {
             uri: product.image
           }}
         />
-        <View>
-            <Text style={styles.title}>{product.title}</Text>
+        <View style={styles.detail}>
+            <Text style={styles.title} ellipsizeMode='tail' numberOfLines={2}>{product.title}</Text>
             <Text style={{color: 'grey', fontSize: 12}}>1x ${product.price}</Text>
             <Text style={{fontWeight: 'bold'}}>${(product.price * quantity).toFixed(2)}</Text>
         </View>
@@ -61,12 +62,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     minHeight: 100,
-    width: 400,
+    maxWidth: 400,
     margin: 2,
+    gap: 10,
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    padding: 4,
+    padding: 14,
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
@@ -83,13 +85,13 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'grey',
-    width: 250
   },
   container: {
-    flex: 1,
-    flexDirection: 'column',
+    backgroundColor: 'white',
     gap: 10,
     alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
   },
   button: {
     backgroundColor: 'white',
@@ -107,5 +109,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.05,
     elevation: 4,
     shadowColor: 'red',
+  },
+  detail: {
+    minWidth: 150,
+    flex: 1,
+    flexDirection: 'column',
+    gap: 4,
+    alignItems: 'flex-start',
   }
 })

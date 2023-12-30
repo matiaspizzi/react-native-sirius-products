@@ -23,7 +23,7 @@ const ProductsList = () =>{
       <ActivityIndicator size="large" color="#0000ff" />
     </View>
   ) : error ? (
-    <View style={{ alignSelf: 'center', flex: 1, justifyContent: 'center', alignItems: 'center', alignContent: 'center', height: 400 }}>
+    <View style={styles.errorContainer}>
       <Text style={{color:'red', fontSize: 10, fontWeight: 'bold'}}>{error.message}</Text>
       <Text style={{fontSize: 14,}}>Sorry, we had a problem loading the products, try again later.</Text>
     </View>
@@ -43,10 +43,17 @@ export default ProductsList
 const styles = StyleSheet.create({
   view: {
     marginTop: 15,
-    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  errorContainer: {
+    alignSelf: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    height: 400,
+  },
 })

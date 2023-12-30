@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CartScreen from "../screens/Cart"
+import CartScreen from "../screens/CartScreen"
 import { FontAwesome5 } from '@expo/vector-icons';
-import MyStacks from '../navigation/stacks'
+import MyStacks from './Stacks'
 import useCartLength from '../hooks/useCartLength'
 
 const Tab = createBottomTabNavigator();

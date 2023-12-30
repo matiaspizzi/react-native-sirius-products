@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
 import { Product, CartItem } from "../utils/types";
-import * as SecureStore from 'expo-secure-store';
+import { MMKV } from "react-native-mmkv";
 
 const CartContext = createContext<{
   cart: CartItem[];
@@ -8,14 +8,17 @@ const CartContext = createContext<{
   removeFromCart: (product: Product) => void;
 }>({ cart: [], addToCart: () => { }, removeFromCart: () => { } });
 
-
+const storage = new MMKV()
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
+  const setStorage = (cart: CartItem[]) => {
+    storage.set('cart', JSON.stringify(cart))
+  }
 
-  const getCart = async () => {
-    const cart = await SecureStore.getItemAsync('cart')
+  const getCart = () => {
+    const cart = storage.getString('cart')
     if (cart) {
       setCart(JSON.parse(cart))
     }
@@ -30,23 +33,23 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     return i
   }
 
-  const addToCart = async (product: Product, quantity: number) => {
+  const addToCart = (product: Product, quantity: number) => {
     const i = isInCart(product.id)
     if (i !== -1) {
       const newCart = [...cart]
       newCart[i].quantity += quantity
       setCart(newCart)
-      await SecureStore.setItemAsync('cart', JSON.stringify(newCart))
+      setStorage(newCart)
     } else {
       setCart([...cart, { product, quantity }]);
-      await SecureStore.setItemAsync('cart', JSON.stringify([...cart, { product, quantity }]));
+      setStorage([...cart, { product, quantity }])
     }
   };
 
-  const removeFromCart = async (product: Product) => {
+  const removeFromCart = (product: Product) => {
     const newCart = cart.filter(item => item.product.id !== product.id)
     setCart(newCart)
-    await SecureStore.setItemAsync('cart', JSON.stringify(newCart));
+    setStorage(newCart)
   };
 
   return (

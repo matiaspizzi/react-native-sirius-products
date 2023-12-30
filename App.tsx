@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import MyTabs from './navigation/tabs'
+import MyTabs from './navigation/Tabs'
 import { CartProvider } from './context/CartContext'
 import { ToastProvider } from 'react-native-toast-notifications'
 

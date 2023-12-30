@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, Image, StyleSheet } from 'react-native'
 import { Product } from '../utils/types'
 
 interface PropTypes {
@@ -8,12 +8,14 @@ interface PropTypes {
 const ProductDetail = ({ product }: PropTypes) => {
 
   return (
-    <View style={styles.view}>
-      <Text style={styles.title}>{product.title}</Text>
-      <Image source={{ uri: product?.image }} style={styles.image} />
-      <Text style={styles.description}>{product.description}</Text>
-      <Text style={styles.price}>$ {product.price}</Text>
-    </View>
+    <ScrollView>
+      <View style={styles.view}>
+        <Text style={styles.title}>{product.title}</Text>
+        <Image source={{ uri: product?.image }} style={styles.image} />
+        <Text style={styles.description}>{product.description}</Text>
+        <Text style={styles.price}>$ {product.price}</Text>
+      </View>
+    </ScrollView>
   )
 }
 
@@ -21,9 +23,10 @@ export default ProductDetail
 
 const styles = StyleSheet.create({
   view: {
-    margin: 30,
+    margin: 15,
     padding: 10,
-    height: 500,
+    minHeight: 500,
+    maxWidth: 400,
     gap: 20,
     flex: 1,
     flexDirection: "column",

@@ -23,7 +23,7 @@ const ProductListCard = ({product}: PropTypes) => {
             uri: product.image
           }}
         />
-        <Text style={styles.title}>{product.title}</Text>
+        <Text style={styles.title} ellipsizeMode='tail' numberOfLines={3}>{product.title}</Text>
         <Text style={styles.price}>${product.price}</Text>
       </View>
     </Pressable> 
