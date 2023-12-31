@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     minHeight: 100,
     maxWidth: 400,
-    margin: 2,
     gap: 10,
     alignItems: 'center',
     justifyContent: 'space-around',

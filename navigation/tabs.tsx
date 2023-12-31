@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CartScreen from "../screens/CartScreen"
 import { FontAwesome5 } from '@expo/vector-icons';
-import MyStacks from './Stacks'
 import useCartLength from '../hooks/useCartLength'
+import HomeScreen from '../screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -10,29 +10,29 @@ const MyTabs = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{ tabBarActiveTintColor: "#b6b4b4" }}
+      screenOptions={{ tabBarActiveTintColor: "black" }}
     >
       <Tab.Screen
         name="Home"
-        component={MyStacks}
+        component={HomeScreen}
         options={{
-          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => {
             return <FontAwesome5 name="home" size={size} color={color} />;
           },
           headerTitleAlign: "center",
+          tabBarLabel: "",
         }}
       />
       <Tab.Screen
         name="Cart"
         component={CartScreen}
         options={{
-          tabBarLabel: "Cart",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => {
             return <FontAwesome5 name="shopping-cart" size={size} color={color} />;
           },
           headerTitleAlign: "center",
           tabBarBadge: useCartLength(),
+          tabBarLabel: "",
         }}
       />
     </Tab.Navigator>

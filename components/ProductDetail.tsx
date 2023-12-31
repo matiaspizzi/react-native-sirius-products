@@ -1,31 +1,28 @@
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native'
-import { Product } from '../utils/types'
+import { View, Text, Image, StyleSheet } from "react-native";
+import { Product } from "../utils/types";
 
 interface PropTypes {
-  product: Product
+  product: Product;
 }
 
 const ProductDetail = ({ product }: PropTypes) => {
-
   return (
-    <ScrollView>
-      <View style={styles.view}>
-        <Text style={styles.title}>{product.title}</Text>
-        <Image source={{ uri: product?.image }} style={styles.image} />
-        <Text style={styles.description}>{product.description}</Text>
-        <Text style={styles.price}>$ {product.price}</Text>
-      </View>
-    </ScrollView>
-  )
-}
+    <View style={styles.view}>
+      <Text style={styles.title}>{product.title}</Text>
+      <Image source={{ uri: product?.image }} style={styles.image} />
+      <Text style={styles.description}>{product.description}</Text>
+      <Text style={styles.price}>$ {product.price}</Text>
+    </View>
+  );
+};
 
-export default ProductDetail
+export default ProductDetail;
 
 const styles = StyleSheet.create({
   view: {
-    margin: 15,
+    marginTop: 20,
     padding: 10,
-    minHeight: 500,
+    minHeight: "auto",
     maxWidth: 400,
     gap: 20,
     flex: 1,
@@ -33,6 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     alignSelf: "center",
+    justifySelf: "center",
     backgroundColor: "white",
     borderRadius: 5,
     shadowOffset: {
@@ -44,8 +42,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 350,
+    height: 350,
     resizeMode: "contain",
   },
   title: {
@@ -54,11 +52,8 @@ const styles = StyleSheet.create({
   },
   description: {
     color: "grey",
-    maxWidth: 300,
   },
   price: {
-    fontWeight: "bold",
-    fontSize: 25,
-    color: "#6897bb",
+    fontSize: 35,
   },
 });

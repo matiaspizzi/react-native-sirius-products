@@ -1,59 +1,77 @@
-import { View, StyleSheet, ScrollView, ActivityIndicator, Text } from 'react-native'
-import { useEffect, useState } from 'react'
-import service from '../utils/service'
-import { Product } from '../utils/types'
-import ProductListCard from './ProductListCard'
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+  Text,
+} from "react-native";
+import { useEffect, useState } from "react";
+import service from "../utils/service";
+import { Product } from "../utils/types";
+import ProductListCard from "../components/ProductListCard";
 
-const ProductsList = () =>{
+const ProductsList = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() =>{
-    service.getProducts({}).then((res) =>{
-      setProducts(res ? res : undefined)
-      setLoading(false)
-    }).catch((e: Error) => {
-      setError(e)
-    })
-  }, [])
+  useEffect(() => {
+    service
+      .getProducts({})
+      .then((res) => {
+        setProducts(res ? res : undefined);
+        setLoading(false);
+      })
+      .catch((e: Error) => {
+        setError(e);
+      });
+  }, []);
 
-  return loading && !error ? (
-    <View style={{ alignSelf: 'center', flex: 1, justifyContent: 'center' }}>
-      <ActivityIndicator size="large" color="#0000ff" />
-    </View>
-  ) : error ? (
-    <View style={styles.errorContainer}>
-      <Text style={{color:'red', fontSize: 10, fontWeight: 'bold'}}>{error.message}</Text>
-      <Text style={{fontSize: 14,}}>Sorry, we had a problem loading the products, try again later.</Text>
-    </View>
-  ) : (
+  return (
     <ScrollView>
-      <View style={styles.view}>
-        {products?.map((product) =>(
-          <ProductListCard key={product.id} product={product} />
-        ))}
-      </View>
+      {loading && !error && (
+        <View style={{ alignSelf: "center", flex: 1, justifyContent: "center", minHeight: 500  }}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      )}
+      {error && (
+        <View style={styles.errorContainer}>
+          <Text style={{ color: "red", fontSize: 10, fontWeight: "bold" }}>
+            {error.message}
+          </Text>
+          <Text style={{ fontSize: 14 }}>
+            Sorry, we had a problem loading the products, try again later.
+          </Text>
+        </View>
+      )}
+      {products && (
+        <View style={styles.view}>
+          {products?.map((product) => (
+            <ProductListCard key={product.id} product={product} />
+          ))}
+        </View>
+      )}
     </ScrollView>
-  )
-}
+  );
+};
 
-export default ProductsList
+export default ProductsList;
 
 const styles = StyleSheet.create({
   view: {
-    marginTop: 15,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 20,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 4,
   },
   errorContainer: {
-    alignSelf: 'center',
+    alignSelf: "center",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
     height: 400,
   },
-})
+});

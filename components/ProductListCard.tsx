@@ -34,7 +34,6 @@ export default ProductListCard
 
 const styles = StyleSheet.create({
   card: {
-    margin: 2,
     alignItems: 'center',
     justifyContent: 'space-around',
     width: 170,
