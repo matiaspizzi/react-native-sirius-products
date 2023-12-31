@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import service from "../utils/service";
 import { Product } from "../utils/types";
 import ProductListCard from "../components/ProductListCard";
+import React from "react";
 
 const ProductsList = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
@@ -30,7 +31,14 @@ const ProductsList = () => {
   return (
     <ScrollView>
       {loading && !error && (
-        <View style={{ alignSelf: "center", flex: 1, justifyContent: "center", minHeight: 500  }}>
+        <View
+          style={{
+            alignSelf: "center",
+            flex: 1,
+            justifyContent: "center",
+            minHeight: 500,
+          }}
+        >
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       )}
@@ -64,7 +72,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    gap: 4,
   },
   errorContainer: {
     alignSelf: "center",

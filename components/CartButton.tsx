@@ -4,6 +4,7 @@ import { Product } from "../utils/types";
 import { CartContext } from "../context/CartContext";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useToast } from "react-native-toast-notifications";
+import React from "react";
 
 interface PropTypes {
   product: Product;
@@ -96,7 +97,8 @@ const styles = StyleSheet.create({
       height: 3,
     },
     shadowColor: "#5489da",
-    border: "1px solid #5489da",
+    borderWidth: 1,
+    borderColor: "white",
     shadowOpacity: 0.3,
     shadowRadius: 3.05,
     elevation: 8,

@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   Text,
 } from "react-native";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import service from "../utils/service";
 import { Product } from "../utils/types";
 import ProductListCard from "../components/ProductListCard";
@@ -17,7 +17,7 @@ const ProductsList = () => {
 
   useEffect(() => {
     service
-      .getProducts({limit: '30'})
+      .getProducts({ limit: "30" })
       .then((res) => {
         setProducts(res ? res : undefined);
         setLoading(false);
@@ -30,7 +30,14 @@ const ProductsList = () => {
   return (
     <ScrollView>
       {loading && !error && (
-        <View style={{ alignSelf: "center", flex: 1, justifyContent: "center", minHeight: 500 }}>
+        <View
+          style={{
+            alignSelf: "center",
+            flex: 1,
+            justifyContent: "center",
+            minHeight: 500,
+          }}
+        >
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
       )}

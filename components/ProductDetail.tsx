@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Product } from "../utils/types";
+import React from "react";
 
 interface PropTypes {
   product: Product;

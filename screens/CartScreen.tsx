@@ -1,6 +1,6 @@
 import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { CartContext } from "../context/CartContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import ProductCartCard from "../components/ProductCartCard";
 import useCartLength from "../hooks/useCartLength";
 

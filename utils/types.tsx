@@ -23,6 +23,6 @@ export interface CartItem {
 
 export type RootStackParamList = {
   Product: { id: string };
-  Products: undefined
+  Products: undefined;
   Home: undefined;
 };

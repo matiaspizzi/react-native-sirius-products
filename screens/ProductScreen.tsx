@@ -14,7 +14,7 @@ import ProductDetail from "../components/ProductDetail";
 import CartButton from "../components/CartButton";
 
 type PropTypes = {
-  route?: RouteProp<RootStackParamList, 'Product'>;
+  route?: RouteProp<RootStackParamList, "Product">;
 };
 
 const ProductScreen = ({ route }: PropTypes) => {
@@ -43,42 +43,49 @@ const ProductScreen = ({ route }: PropTypes) => {
 
   return (
     <View>
-      {loading && !error &&
-        <View style={{ alignSelf: 'center', flex: 1, justifyContent: 'center', minHeight: 500 }}>
+      {loading && !error && (
+        <View
+          style={{
+            alignSelf: "center",
+            flex: 1,
+            justifyContent: "center",
+            minHeight: 500,
+          }}
+        >
           <ActivityIndicator size="large" color="#0000ff" />
         </View>
-      }
-      {error &&
+      )}
+      {error && (
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>{error!.message}</Text>
           <Text style={{ fontSize: 14 }}>
             Sorry, we had a problem loading the products, try again later.
           </Text>
         </View>
-      }
-      {product &&
-        <ScrollView >
+      )}
+      {product && (
+        <ScrollView>
           <View style={styles.container}>
             <ProductDetail product={product} />
             <CartButton product={product} />
           </View>
         </ScrollView>
-      }
-      {!product && !loading &&
+      )}
+      {!product && !loading && (
         <View>
           <Text>No product found.</Text>
         </View>
-      }
+      )}
     </View>
-  )
+  );
 };
 
 export default ProductScreen;
 
 const styles = StyleSheet.create({
   container: {
-    gap:10,
-    paddingBottom: 10
+    gap: 10,
+    paddingBottom: 10,
   },
   errorContainer: {
     alignSelf: "center",
