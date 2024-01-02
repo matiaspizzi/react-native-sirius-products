@@ -4,7 +4,6 @@ import {
   ActivityIndicator,
   ScrollView,
   Text,
-  StyleSheet,
 } from "react-native";
 import { RouteProp } from "@react-navigation/native";
 import service from "../utils/service";
@@ -13,6 +12,7 @@ import { Product, RootStackParamList } from "../utils/types";
 import ProductDetail from "../components/ProductDetail";
 import CartButton from "../components/CartButton";
 import Constants from "../utils/constants";
+import Styles from "../utils/styles";
 
 type PropTypes = {
   route?: RouteProp<RootStackParamList, "Product">;
@@ -45,13 +45,13 @@ const ProductScreen = ({ route }: PropTypes) => {
   return (
     <View>
       {loading && !error && (
-        <View style={styles.container}>
+        <View style={Styles.container}>
           <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
         </View>
       )}
       {error && (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{error!.message}</Text>
+        <View style={Styles.errorContainer}>
+          <Text style={Styles.textError}>{error!.message}</Text>
           <Text>
             Sorry, we had a problem loading the products, try again later.
           </Text>
@@ -59,7 +59,7 @@ const ProductScreen = ({ route }: PropTypes) => {
       )}
       {product && (
         <ScrollView>
-          <View style={styles.container}>
+          <View style={Styles.container}>
             <ProductDetail product={product} />
             <CartButton product={product} />
           </View>
@@ -75,26 +75,3 @@ const ProductScreen = ({ route }: PropTypes) => {
 };
 
 export default ProductScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: "center",
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    minHeight: 500,
-  },
-  errorContainer: {
-    alignSelf: "center",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-    height: 400,
-  },
-  errorText: {
-    color: "red",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-});

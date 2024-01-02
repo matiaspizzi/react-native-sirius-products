@@ -6,7 +6,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useToast } from "react-native-toast-notifications";
 import React from "react";
 import Constants from "../utils/constants";
-import Styles from "../utils/styles";
+import Counter from "./Counter";
 
 interface PropTypes {
   product: Product;
@@ -28,28 +28,16 @@ const CartButton = ({ product }: PropTypes) => {
     });
   };
 
-  const handleSum = () => {
-    if (quantity < 9) setQty(quantity + 1);
-  };
-
-  const handleRest = () => {
-    if (quantity > 1) setQty(quantity - 1);
-  };
+  const handleSetQty = (qty: number) => {
+    setQty(qty);
+  }
 
   return (
     <View style={styles.container}>
       <Pressable onPress={handleButton} style={styles.buttonAdd}>
         <FontAwesome5 name="cart-plus" size={18} color="black" />
       </Pressable>
-      <View style={styles.counter}>
-        <Pressable onPress={handleRest} style={styles.button}>
-          <Text style={Styles.text1}> - </Text>
-        </Pressable>
-        <Text>{quantity}</Text>
-        <Pressable onPress={handleSum} style={styles.button}>
-          <Text style={Styles.text1}> + </Text>
-        </Pressable>
-      </View>
+      <Counter handleSetQty={handleSetQty}/>
     </View>
   );
 };
@@ -57,40 +45,11 @@ const CartButton = ({ product }: PropTypes) => {
 export default CartButton;
 
 const styles = StyleSheet.create({
-  counter: {
-    marginTop: 10,
-    marginBottom: 5,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 20,
-    backgroundColor: "white",
-    height: 40,
-    width: "auto",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.17,
-    shadowRadius: 3.05,
-    elevation: 4,
-    borderRadius: 5,
-  },
   container: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
     gap: 20,
-  },
-  button: {
-    flexDirection: "row",
-    alaignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-    borderRadius: 5,
-    minWidth: 40,
   },
   buttonAdd: {
     padding: 8,
@@ -101,8 +60,6 @@ const styles = StyleSheet.create({
       height: 3,
     },
     shadowColor: Constants.colors.lightBlue,
-    borderWidth: 1,
-    borderColor: "white",
     shadowOpacity: 0.3,
     shadowRadius: 3.05,
     elevation: 8,

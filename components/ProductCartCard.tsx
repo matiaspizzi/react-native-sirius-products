@@ -13,7 +13,6 @@ interface PropTypes {
 }
 
 const ProductListCard = ({ product, quantity }: PropTypes) => {
-
   const toast = useToast();
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -36,26 +35,24 @@ const ProductListCard = ({ product, quantity }: PropTypes) => {
   return (
     <Pressable style={styles.card} onPress={handlePress}>
       <Image
-        style={styles.image}
+        style={Styles.imageSm}
         source={{
           uri: product.image,
         }}
       />
       <View style={styles.detail}>
-        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={2}>
+        <Text style={Styles.text2} ellipsizeMode="tail" numberOfLines={2}>
           {product.title}
         </Text>
         <Text style={Styles.text2}>1x ${product.price}</Text>
-        <Text>
-          ${(product.price * quantity).toFixed(2)}
-        </Text>
+        <Text>${(product.price * quantity).toFixed(2)}</Text>
       </View>
-      <View style={styles.container}>
+      <View style={styles.align}>
         <Text style={Styles.text3}>x{quantity}</Text>
         <Button
           title="Remove"
           onPress={handleRemove}
-          style={{secondary: "red"}}
+          style={{ secondary: "red" }}
         />
       </View>
     </Pressable>
@@ -85,26 +82,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.05,
     elevation: 4,
   },
-  image: {
-    resizeMode: "contain",
-    height: 80,
-    width: 80,
+  detail:{
+    maxWidth: 200,
   },
-  title: {
-    color: "grey",
-  },
-  container: {
-    backgroundColor: "white",
+  align: {
     gap: 10,
     alignItems: "center",
     justifyContent: "center",
-    height: 100,
   },
-  detail: {
-    minWidth: 150,
-    flex: 1,
-    flexDirection: "column",
-    gap: 4,
-    alignItems: "flex-start",
-  }
 });

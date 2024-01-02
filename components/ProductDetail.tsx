@@ -1,6 +1,7 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Product } from "../utils/types";
 import React from "react";
+import Styles from "../utils/styles";
 
 interface PropTypes {
   product: Product;
@@ -9,10 +10,10 @@ interface PropTypes {
 const ProductDetail = ({ product }: PropTypes) => {
   return (
     <View style={styles.view}>
-      <Text style={styles.title}>{product.title}</Text>
-      <Image source={{ uri: product?.image }} style={styles.image} />
-      <Text style={styles.description}>{product.description}</Text>
-      <Text style={styles.price}>$ {product.price}</Text>
+      <Text style={Styles.title}>{product.title}</Text>
+      <Image source={{ uri: product?.image }} style={Styles.imageBg} />
+      <Text style={Styles.text2}>{product.description}</Text>
+      <Text style={Styles.textBg}>$ {product.price}</Text>
     </View>
   );
 };
@@ -26,9 +27,7 @@ const styles = StyleSheet.create({
     minHeight: "auto",
     maxWidth: 400,
     gap: 20,
-    flex: 1,
     flexDirection: "column",
-    justifyContent: "space-around",
     alignItems: "center",
     alignSelf: "center",
     justifySelf: "center",
@@ -41,20 +40,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.17,
     shadowRadius: 3.05,
     elevation: 4,
-  },
-  image: {
-    width: 350,
-    height: 350,
-    resizeMode: "contain",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  description: {
-    color: "grey",
-  },
-  price: {
-    fontSize: 35,
-  },
+  }
 });

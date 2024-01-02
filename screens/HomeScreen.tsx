@@ -1,6 +1,5 @@
 import {
   View,
-  StyleSheet,
   ScrollView,
   ActivityIndicator,
   Text,
@@ -8,11 +7,11 @@ import {
 import React, { useEffect, useState } from "react";
 import service from "../utils/service";
 import { Product } from "../utils/types";
-import ProductListCard from "../components/ProductListCard";
 import Constants from "../utils/constants";
 import Styles from "../utils/styles";
+import ProductsList from "../components/ProductsList";
 
-const ProductsList = () => {
+const HomeScreen = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -32,7 +31,7 @@ const ProductsList = () => {
   return (
     <ScrollView>
       {loading && !error && (
-        <View style={styles.container}>
+        <View style={Styles.container}>
           <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
         </View>
       )}
@@ -46,41 +45,9 @@ const ProductsList = () => {
           </Text>
         </View>
       )}
-      {products && (
-        <View style={styles.view}>
-          {products?.map((product) => (
-            <ProductListCard key={product.id} product={product} />
-          ))}
-        </View>
-      )}
+      {products && <ProductsList products={products}/>}
     </ScrollView>
   );
 };
 
-export default ProductsList;
-
-const styles = StyleSheet.create({
-  view: {
-    marginTop: 20,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 4,
-  },
-  container: {
-    alignSelf: "center",
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    minHeight: 500,
-  },
-  errorContainer: {
-    alignSelf: "center",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-    height: 400,
-  },
-});
+export default HomeScreen;

@@ -29,7 +29,7 @@ const Button = ({ title, onPress, style }: PropTypes) => {
 
   return (
     <Pressable style={styles.button} onPress={onPress}>
-      <Text style={Styles.textSmall}>{title}</Text>
+      <Text style={Styles.textSm}>{title}</Text>
     </Pressable>
   );
 };
