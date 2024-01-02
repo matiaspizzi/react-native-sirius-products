@@ -55,7 +55,7 @@ const ProductListCard = ({ product, quantity }: PropTypes) => {
         <Button
           title="Remove"
           onPress={handleRemove}
-          style={{button: styles.button}}
+          style={{secondary: "red"}}
         />
       </View>
     </Pressable>
@@ -106,22 +106,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 4,
     alignItems: "flex-start",
-  },
-  button: {
-    backgroundColor: "white",
-    borderColor: "red",
-    borderWidth: 0.25,
-    padding: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 3,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.17,
-    shadowRadius: 3.05,
-    elevation: 4,
-    shadowColor: "red",
-  },
+  }
 });

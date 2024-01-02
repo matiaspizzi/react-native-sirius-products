@@ -1,36 +1,37 @@
 import React from "react";
-import { Pressable, Text, StyleSheet } from "react-native"
+import { Pressable, Text, StyleSheet } from "react-native";
 import Styles from "../utils/styles";
 
 interface PropTypes {
-  title: string,
-  onPress: () => void,
+  title: string;
+  onPress: () => void;
   style?: {
-    button?: object,
-    title?: object,
-  },
-};
+    primary?: string;
+    secondary?: string;
+    width?: number;
+  };
+}
 
 const Button = ({ title, onPress, style }: PropTypes) => {
 
+  const styles = StyleSheet.create({
+    button: {
+      backgroundColor: style?.primary ? style.primary : "white",
+      borderWidth: 1,
+      borderColor: style?.secondary ? style.secondary : "grey",
+      padding: 5,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 3,
+      width: style?.width ? style.width : "auto",
+    },
+  });
+
   return (
-    <Pressable style={[style?.button ? style.button : styles.button]} onPress={onPress}>
-      <Text style={[style?.title ? style.title : Styles.textSmall]}>{title}</Text>
+    <Pressable style={styles.button} onPress={onPress}>
+      <Text style={Styles.textSmall}>{title}</Text>
     </Pressable>
   );
-}
+};
 
 export default Button;
-
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "grey",
-    padding: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 3
-  },
-})
