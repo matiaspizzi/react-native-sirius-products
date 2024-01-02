@@ -58,6 +58,8 @@ export default CartButton;
 
 const styles = StyleSheet.create({
   counter: {
+    marginTop: 10,
+    marginBottom: 5,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

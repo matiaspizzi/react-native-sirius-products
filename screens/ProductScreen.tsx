@@ -78,8 +78,11 @@ export default ProductScreen;
 
 const styles = StyleSheet.create({
   container: {
-    gap: 10,
-    paddingBottom: 10,
+    alignSelf: "center",
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    minHeight: 500,
   },
   errorContainer: {
     alignSelf: "center",

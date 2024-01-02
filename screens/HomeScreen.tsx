@@ -32,9 +32,7 @@ const ProductsList = () => {
   return (
     <ScrollView>
       {loading && !error && (
-        <View
-          style={styles.container}
-        >
+        <View style={styles.container}>
           <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
         </View>
       )}
@@ -74,6 +72,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     flex: 1,
     justifyContent: "center",
+    alignContent: "center",
     minHeight: 500,
   },
   errorContainer: {
