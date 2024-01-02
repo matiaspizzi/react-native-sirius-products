@@ -43,7 +43,7 @@ const ProductScreen = ({ route }: PropTypes) => {
   }, [id]);
 
   return (
-    <View>
+    <ScrollView>
       {loading && !error && (
         <View style={Styles.container}>
           <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
@@ -70,7 +70,7 @@ const ProductScreen = ({ route }: PropTypes) => {
           <Text>No product found.</Text>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
