@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { Product, RootStackParamList } from "../utils/types";
-import { CartContext } from "../context/CartContext";
-import { useContext } from "react";
+import { useCartContext } from "../hooks/useCartContext";
 import { useToast } from "react-native-toast-notifications";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useHover } from "react-native-web-hooks";
+import Styles from "../utils/styles";
 import React from "react";
+import Button from "./Button";
 
 interface PropTypes {
   product: Product;
@@ -13,11 +13,12 @@ interface PropTypes {
 }
 
 const ProductListCard = ({ product, quantity }: PropTypes) => {
-  const { removeFromCart } = useContext(CartContext);
 
   const toast = useToast();
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const { removeFromCart } = useCartContext();
 
   const handleRemove = () => {
     removeFromCart(product);
@@ -44,16 +45,18 @@ const ProductListCard = ({ product, quantity }: PropTypes) => {
         <Text style={styles.title} ellipsizeMode="tail" numberOfLines={2}>
           {product.title}
         </Text>
-        <Text style={{ color: "grey", fontSize: 12 }}>1x ${product.price}</Text>
-        <Text style={{ fontWeight: "bold" }}>
+        <Text style={Styles.text2}>1x ${product.price}</Text>
+        <Text>
           ${(product.price * quantity).toFixed(2)}
         </Text>
       </View>
       <View style={styles.container}>
-        <Text style={{ color: "grey", fontWeight: "bold" }}>x{quantity}</Text>
-        <Pressable style={styles.button} onPress={handleRemove}>
-          <Text style={{ fontSize: 10 }}>Eliminar</Text>
-        </Pressable>
+        <Text style={Styles.text3}>x{quantity}</Text>
+        <Button
+          title="Remove"
+          onPress={handleRemove}
+          style={{button: styles.button}}
+        />
       </View>
     </Pressable>
   );
@@ -97,6 +100,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 100,
   },
+  detail: {
+    minWidth: 150,
+    flex: 1,
+    flexDirection: "column",
+    gap: 4,
+    alignItems: "flex-start",
+  },
   button: {
     backgroundColor: "white",
     borderColor: "red",
@@ -113,12 +123,5 @@ const styles = StyleSheet.create({
     shadowRadius: 3.05,
     elevation: 4,
     shadowColor: "red",
-  },
-  detail: {
-    minWidth: 150,
-    flex: 1,
-    flexDirection: "column",
-    gap: 4,
-    alignItems: "flex-start",
   },
 });

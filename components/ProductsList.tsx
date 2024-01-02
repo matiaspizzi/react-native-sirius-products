@@ -10,6 +10,8 @@ import service from "../utils/service";
 import { Product } from "../utils/types";
 import ProductListCard from "../components/ProductListCard";
 import React from "react";
+import Constants from "../utils/constants";
+import Styles from "../utils/styles";
 
 const ProductsList = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
@@ -31,29 +33,22 @@ const ProductsList = () => {
   return (
     <ScrollView>
       {loading && !error && (
-        <View
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            justifyContent: "center",
-            minHeight: 500,
-          }}
-        >
-          <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.container} >
+          <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
         </View>
       )}
       {error && (
-        <View style={styles.errorContainer}>
-          <Text style={{ color: "red", fontSize: 10, fontWeight: "bold" }}>
+        <View style={Styles.errorContainer}>
+          <Text style={Styles.textError}>
             {error.message}
           </Text>
-          <Text style={{ fontSize: 14 }}>
+          <Text>
             Sorry, we had a problem loading the products, try again later.
           </Text>
         </View>
       )}
       {products && (
-        <View style={styles.view}>
+        <View style={styles.list}>
           {products?.map((product) => (
             <ProductListCard key={product.id} product={product} />
           ))}
@@ -66,12 +61,19 @@ const ProductsList = () => {
 export default ProductsList;
 
 const styles = StyleSheet.create({
-  view: {
+  list: {
     marginTop: 20,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
+  },
+  container: {
+    alignSelf: "center",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 500,
   },
   errorContainer: {
     alignSelf: "center",

@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Product, RootStackParamList } from "../utils/types";
 import ProductDetail from "../components/ProductDetail";
 import CartButton from "../components/CartButton";
+import Constants from "../utils/constants";
 
 type PropTypes = {
   route?: RouteProp<RootStackParamList, "Product">;
@@ -44,21 +45,14 @@ const ProductScreen = ({ route }: PropTypes) => {
   return (
     <View>
       {loading && !error && (
-        <View
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            justifyContent: "center",
-            minHeight: 500,
-          }}
-        >
-          <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
         </View>
       )}
       {error && (
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>{error!.message}</Text>
-          <Text style={{ fontSize: 14 }}>
+          <Text>
             Sorry, we had a problem loading the products, try again later.
           </Text>
         </View>

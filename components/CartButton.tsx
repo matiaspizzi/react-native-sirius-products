@@ -1,10 +1,12 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Product } from "../utils/types";
-import { CartContext } from "../context/CartContext";
+import { useCartContext } from "../hooks/useCartContext";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useToast } from "react-native-toast-notifications";
 import React from "react";
+import Constants from "../utils/constants";
+import Styles from "../utils/styles";
 
 interface PropTypes {
   product: Product;
@@ -13,9 +15,9 @@ interface PropTypes {
 const CartButton = ({ product }: PropTypes) => {
   const [quantity, setQty] = useState<number>(1);
 
-  const { addToCart } = useContext(CartContext);
-
   const toast = useToast();
+
+  const { addToCart } = useCartContext();
 
   const handleButton = () => {
     addToCart(product, quantity);
@@ -41,11 +43,11 @@ const CartButton = ({ product }: PropTypes) => {
       </Pressable>
       <View style={styles.counter}>
         <Pressable onPress={handleRest} style={styles.button}>
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}> - </Text>
+          <Text style={Styles.text1}> - </Text>
         </Pressable>
         <Text>{quantity}</Text>
         <Pressable onPress={handleSum} style={styles.button}>
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}> + </Text>
+          <Text style={Styles.text1}> + </Text>
         </Pressable>
       </View>
     </View>
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3,
     },
-    shadowColor: "#5489da",
+    shadowColor: Constants.colors.lightBlue,
     borderWidth: 1,
     borderColor: "white",
     shadowOpacity: 0.3,

@@ -1,12 +1,12 @@
 import { StyleSheet, ScrollView, View, Text } from "react-native";
-import { CartContext } from "../context/CartContext";
-import React, { useContext } from "react";
+import { useCartContext } from "../hooks/useCartContext";
 import ProductCartCard from "../components/ProductCartCard";
-import useCartLength from "../hooks/useCartLength";
+import Styles from "../utils/styles";
+import React from "react";
 
 const CartScreen = () => {
-  const { cart } = useContext(CartContext);
-  const length = useCartLength();
+  
+  const { cart } = useCartContext();
 
   const totalPrice = cart?.reduce((acc, item) => {
     return acc + item.product.price * item.quantity;
@@ -14,12 +14,12 @@ const CartScreen = () => {
 
   return (
     <ScrollView>
-      {length === 0 && (
+      {cart.length === 0 && (
         <View style={styles.container}>
           <Text style={styles.text}>The cart is empty, add some products!</Text>
         </View>
       )}
-      {length > 0 && (
+      {cart.length > 0 && (
         <View style={styles.view}>
           {cart?.map((item) => (
             <ProductCartCard
@@ -30,7 +30,7 @@ const CartScreen = () => {
           ))}
           <View style={styles.finalPrice}>
             <Text>Total price: </Text>
-            <Text style={{ fontWeight: "bold" }}>
+            <Text style={Styles.text1}>
               $ {totalPrice.toFixed(2)}
             </Text>
           </View>

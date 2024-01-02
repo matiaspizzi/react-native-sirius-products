@@ -9,6 +9,8 @@ import React, { useEffect, useState } from "react";
 import service from "../utils/service";
 import { Product } from "../utils/types";
 import ProductListCard from "../components/ProductListCard";
+import Constants from "../utils/constants";
+import Styles from "../utils/styles";
 
 const ProductsList = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
@@ -31,22 +33,17 @@ const ProductsList = () => {
     <ScrollView>
       {loading && !error && (
         <View
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            justifyContent: "center",
-            minHeight: 500,
-          }}
+          style={styles.container}
         >
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color={Constants.colors.lightBlue} />
         </View>
       )}
       {error && (
-        <View style={styles.errorContainer}>
-          <Text style={{ color: "red", fontSize: 10, fontWeight: "bold" }}>
+        <View style={Styles.errorContainer}>
+          <Text style={Styles.textError}>
             {error.message}
           </Text>
-          <Text style={{ fontSize: 14 }}>
+          <Text>
             Sorry, we had a problem loading the products, try again later.
           </Text>
         </View>
@@ -72,6 +69,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 4,
+  },
+  container: {
+    alignSelf: "center",
+    flex: 1,
+    justifyContent: "center",
+    minHeight: 500,
   },
   errorContainer: {
     alignSelf: "center",
