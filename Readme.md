@@ -1,7 +1,5 @@
 # REACT NATIVE - SIRIUS PRODUCTS
 
-In this example you'll find an already setted up express server with some existing endpoints, authentication, error handling and more.
-
 ## Setup
 
 - Install [Expo](https://docs.expo.dev/get-started/installation/), [Node v18](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/)
